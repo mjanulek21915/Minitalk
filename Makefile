@@ -1,6 +1,11 @@
 CC = gcc
 
+NAMES = server client
+
+FLAGS = -Werror -Wextra -Wall
+
 SRCS_S = 	server.c \
+			lib.c
 
 SRCS_C = 	client.c \
 			lib.c
@@ -12,7 +17,7 @@ OBJS_C = $(SRCS_C:.c=.o)
 
 .PHONY : server client clean fclean all re
 
-all : client server
+all : $(NAMES)
 
 %.o : %.c
 	$(CC) -c -o $@ $<
@@ -24,12 +29,11 @@ server : ${OBJS_S}
 	$(CC) ${OBJS_S} -o server
 
 
-# clean:
-# 	rm -f $(OBJS_C)
-# 	rm -f $(OBJS_S)
+clean:
+	rm -f $(OBJS_C)
+	rm -f $(OBJS_S)
 	
-# fclean: clean
-# 	rm -f $(NAME)
-# 	rm -f $(OBJS)
+fclean: clean
+	rm -f $(NAMES)
 
-# re: fclean all
+re: fclean all

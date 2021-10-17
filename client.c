@@ -19,15 +19,9 @@ void				ft_transmit_char(unsigned char c)
 		c = c << 1;
 		usleep(MINITALK_MOMENT * 10);
 		if (rst == 0)
-		{
 			kill(client_args.id, SIGUSR1);
-
-		}
 		else
-		{
-
 			kill(client_args.id, SIGUSR2);
-		}
 		i++;
 	}
 	client_args.success = 0;
@@ -59,7 +53,6 @@ void				ft_transmit(char *str)
 		ft_transmit_char(*str);
 		str++;
 	}
-fprintf(stderr, "transmit ok");
 	kill(client_args.id, SIGUSR2);
 }
 
@@ -69,10 +62,7 @@ int main(int ac, char **av)
 	t_sigaction sa;
 
 	if (ac != 3)
-	{
 		return (0);
-	}
-// fprintf(stderr, "str : %s", av[2]);
 	client_args.success = 0;
 	client_args.id = ft_atoi(av[1]);
 	client_args.sa = &sa;

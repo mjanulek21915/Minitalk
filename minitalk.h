@@ -9,6 +9,8 @@
 
 unsigned int ft_atoi(char *str);
 void do_exit(void);
+void ft_write_pid(pid_t nbr);
+void ft_write_pid_rec(pid_t nbr);
 
 struct												s_server_args;
 typedef struct s_server_args						t_server_args;

@@ -73,13 +73,15 @@ void	ft_on_confirmation_server(int sig, siginfo_t *info, void *context)
 int main()
 {
 	t_sigaction sa;
+	pid_t id;
 
 	server_args.success = 0;
 	server_args.id = 0;
 	server_args.sa = &sa;
 	server_args.rst = 0;
 	server_args.pos = 0;
-	printf("PID: %d\n", getpid());	   //display PID for kill()
+	id = getpid();
+	ft_write_pid(id);
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = ft_on_connect_server;
 	sigaction(SIGUSR1, &sa, NULL);

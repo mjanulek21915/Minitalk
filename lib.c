@@ -2,7 +2,6 @@
 
 void do_exit(void)
 {
-fprintf(stderr, "egzitink\n");
 	exit(0);
 }
 
@@ -20,5 +19,37 @@ unsigned int ft_atoi(char *str)
 	if(rst <= UINT_MAX)
 		return ((unsigned int)rst);
 	else
+	{
 		do_exit();
+		return (0);
+	}
+}
+
+void ft_write_pid_rec(pid_t nbr)
+{
+	int i;
+	char c;
+
+	i = 0;
+
+	if (nbr / 10)
+	{
+		ft_write_pid_rec(nbr/10);
+
+		c = (char)(nbr % 10) + '0';
+		write(1, &c, 1);
+	}
+	else if (nbr % 10)
+	{
+		c = ((char)(nbr) % 10) + '0';
+		write(1, &c, 1);
+	}
+}
+
+void ft_write_pid(pid_t nbr)
+{
+	if (nbr)
+		ft_write_pid_rec(nbr);
+	else
+		write(1, "0", 1);
 }
