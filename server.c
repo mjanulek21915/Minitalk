@@ -75,6 +75,10 @@ int main()
 	t_sigaction sa;
 	pid_t id;
 
+	sigemptyset(&sa.sa_mask); 
+	sigaddset(&sa.sa_mask, SIGUSR1);
+	sigaddset(&sa.sa_mask, SIGUSR2);
+
 	server_args.success = 0;
 	server_args.id = 0;
 	server_args.sa = &sa;

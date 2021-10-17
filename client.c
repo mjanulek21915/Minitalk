@@ -61,6 +61,9 @@ int main(int ac, char **av)
 {
 	t_sigaction sa;
 
+	sigemptyset(&sa.sa_mask); 
+	sigaddset(&sa.sa_mask, SIGUSR1);
+	sigaddset(&sa.sa_mask, SIGUSR2);
 	if (ac != 3)
 		return (0);
 	client_args.success = 0;
