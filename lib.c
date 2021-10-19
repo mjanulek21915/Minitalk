@@ -12,14 +12,13 @@
 
 #include "minitalk.h"
 
-void						do_exit(void)
+void				do_exit(void)
 {
 	exit(0);
 }
 
-unsigned int				ft_atoi(char *str)
+unsigned int		ft_atoi(char *str)
 {
-//fprintf(stderr, "ft_atoi start. str = %s\n", str);
 	unsigned long int rst;
 
 	rst = 0;
@@ -35,7 +34,7 @@ unsigned int				ft_atoi(char *str)
 		do_exit();
 }
 
-static void					ft_write_pid_rec(pid_t nbr)
+static void			ft_write_pid_rec(pid_t nbr)
 {
 	int i;
 	char c;
@@ -56,7 +55,7 @@ static void					ft_write_pid_rec(pid_t nbr)
 	}
 }
 
-void						ft_write_pid(pid_t nbr)
+void				ft_write_pid(pid_t nbr)
 {
 	if (nbr)
 		ft_write_pid_rec(nbr);
