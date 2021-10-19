@@ -32,7 +32,6 @@ static void	ft_client_transmit_byte(pid_t pid, char c)
 		else
 			kill(pid, SIGUSR2);
 		usleep(10000);
-
 		i++;
 	}
 }
@@ -54,14 +53,12 @@ int	main(int ac, char **av)
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
 	if ((sigaddset(&sa.sa_mask, SIGUSR1)) || (sigaddset(&sa.sa_mask, SIGUSR2)))
-		return(0);
+		return (0);
 	sa.sa_sigaction = ft_pass;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-
 	if (ac != 3)
 		return (0);
-	if (!(pid = ft_atoi(av[1])))
-		return(0);
+	pid = ft_atoi(av[1]);
 	ft_client_transmit(pid, av[2]);
 }

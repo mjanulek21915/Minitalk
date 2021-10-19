@@ -28,7 +28,7 @@ unsigned int	ft_atoi(char *str)
 		rst = rst + *str - '0';
 		str++;
 	}
-	if (rst <= UINT_MAX)
+	if (rst <= UINT_MAX && rst)
 		return ((unsigned int)rst);
 	else
 		do_exit();
