@@ -44,11 +44,11 @@ int	main(int ac, char **av)
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = ft_listen;
-	sigemptyset(&sa.sa_mask);
-	sigaddset(&sa.sa_mask, SIGUSR1);
-	sigaddset(&sa.sa_mask, SIGUSR2);
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
+	if ((sigemptyset(&sa.sa_mask)) || (sigaddset(&sa.sa_mask, SIGUSR1))
+		|| (sigaddset(&sa.sa_mask, SIGUSR2)))
+		return (0);
+	if ((sigaction(SIGUSR1, &sa, NULL)) || (sigaction(SIGUSR2, &sa, NULL)))
+		return (0);
 	ft_write_pid(getpid());
 	while (1)
 		pause();
