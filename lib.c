@@ -36,15 +36,13 @@ unsigned int	ft_atoi(char *str)
 
 static void	ft_write_pid_rec(pid_t nbr)
 {
-	int i;
-	char c;
+	int		i;
+	char	c;
 
 	i = 0;
-
 	if (nbr / 10)
 	{
-		ft_write_pid_rec(nbr/10);
-
+		ft_write_pid_rec(nbr / 10);
 		c = (char)(nbr % 10) + '0';
 		write(1, &c, 1);
 	}
@@ -55,7 +53,7 @@ static void	ft_write_pid_rec(pid_t nbr)
 	}
 }
 
-void				ft_write_pid(pid_t nbr)
+void	ft_write_pid(pid_t nbr)
 {
 	if (nbr)
 		ft_write_pid_rec(nbr);
