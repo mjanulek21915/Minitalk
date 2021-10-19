@@ -52,11 +52,12 @@ int	main(int ac, char **av)
 
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
-	if ((sigaddset(&sa.sa_mask, SIGUSR1)) || (sigaddset(&sa.sa_mask, SIGUSR2)))
+	if ((sigemptyset(&sa.sa_mask)) || (sigaddset(&sa.sa_mask, SIGUSR1)) || 
+	(sigaddset(&sa.sa_mask, SIGUSR2)))
 		return (0);
 	sa.sa_sigaction = ft_pass;
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
+	if ((sigaction(SIGUSR1, &sa, NULL)) || (sigaction(SIGUSR2, &sa, NULL)))
+		return (0);
 	if (ac != 3)
 		return (0);
 	pid = ft_atoi(av[1]);
