@@ -34,14 +34,14 @@ void	ft_listen(int sig, siginfo_t *info, void *context)
 		pos = 0;
 		rst = 0;
 	}
-// usleep(100);
 	kill(info->si_pid, SIGUSR1);
 }
 
 int	main(int ac, char **av)
 {
-	struct sigaction sa;
-	pid_t pid;
+	struct	sigaction sa;
+	pid_t	pid;
+
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = ft_listen;
 	sigemptyset(&sa.sa_mask);
