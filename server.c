@@ -39,8 +39,8 @@ void	ft_listen(int sig, siginfo_t *info, void *context)
 
 int	main(int ac, char **av)
 {
-	struct	sigaction sa;
-	pid_t	pid;
+	struct sigaction	sa;
+	pid_t				pid;
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = ft_listen;
