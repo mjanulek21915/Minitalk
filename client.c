@@ -1,6 +1,6 @@
 #include "minitalk.h"
 
-void ft_pass(void)
+void ft_pass(int sig, siginfo_t *info, void *context)
 {
 
 }
