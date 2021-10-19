@@ -1,12 +1,11 @@
 #include "minitalk.h"
 
-void	ft_connect_confirm(int sig, siginfo_t *info, void *context)
+void ft_pass(void)
 {
-	if (info->si_pid == client_args.id)
-		client_args.success = 1;
+
 }
 
-void				ft_transmit_char(unsigned char c)
+static void ft_client_transmit_byte(pid_t pid, char c)
 {
 	int i;
 	unsigned char rst;
@@ -17,61 +16,46 @@ void				ft_transmit_char(unsigned char c)
 	{
 		rst = c & 128;
 		c = c << 1;
-		usleep(MINITALK_MOMENT * 10);
 		if (rst == 0)
-			kill(client_args.id, SIGUSR1);
+			kill(pid, SIGUSR1);
 		else
-			kill(client_args.id, SIGUSR2);
+			kill(pid, SIGUSR2);
+		usleep(10000);
+
 		i++;
 	}
-	client_args.success = 0;
-	while (client_args.success == 0)
-		pause();
 }
 
-void				ft_connect(void)
-{
-
-	client_args.sa->sa_sigaction = ft_connect_confirm;
-	sigaction(SIGUSR1, client_args.sa, NULL);
-	sigaction(SIGUSR2, client_args.sa, NULL);
-
-	while (client_args.success == 0)
-	{
-		kill(client_args.id, SIGUSR1);
-		usleep(50000);
-	}
-}
-
-
-void				ft_transmit(char *str)
+static void ft_client_transmit(pid_t pid, char *str)
 {
 	while (*str)
 	{
-		kill(client_args.id, SIGUSR1);
-		usleep(MINITALK_MOMENT * 3);
-		ft_transmit_char(*str);
+		ft_client_transmit_byte(pid, *str);
 		str++;
 	}
-	kill(client_args.id, SIGUSR2);
 }
-
 
 int main(int ac, char **av)
 {
-	t_sigaction sa;
+	pid_t pid;
+	struct sigaction sa;
 
-	sigemptyset(&sa.sa_mask); 
-	sigaddset(&sa.sa_mask, SIGUSR1);
-	sigaddset(&sa.sa_mask, SIGUSR2);
+	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
+	if ((sigaddset(&sa.sa_mask, SIGUSR1)) || (sigaddset(&sa.sa_mask, SIGUSR2)))
+	{
+		return(0);
+	}
+	sa.sa_sigaction = ft_pass;
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
+
 	if (ac != 3)
 		return (0);
-	client_args.success = 0;
-	client_args.id = ft_atoi(av[1]);
-	client_args.sa = &sa;
-	client_args.rst = 0;
-	client_args.pos = 0;
-	sa.sa_flags = SA_SIGINFO;
-	ft_connect();
-	ft_transmit(av[2]);
+	if (!(pid = ft_atoi(av[1])))
+	{
+	
+		return(0);
+	}
+	ft_client_transmit(pid, av[2]);
 }
