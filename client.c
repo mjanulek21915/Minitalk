@@ -11,13 +11,12 @@
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-void ft_pass(int sig, siginfo_t *info, void *context)
+void						ft_pass(int sig, siginfo_t *info, void *context)
 {
 
 }
 
-static void ft_client_transmit_byte(pid_t pid, char c)
+static void					ft_client_transmit_byte(pid_t pid, char c)
 {
 	int i;
 	unsigned char rst;
@@ -38,7 +37,7 @@ static void ft_client_transmit_byte(pid_t pid, char c)
 	}
 }
 
-static void ft_client_transmit(pid_t pid, char *str)
+static void					ft_client_transmit(pid_t pid, char *str)
 {
 	while (*str)
 	{
@@ -47,7 +46,7 @@ static void ft_client_transmit(pid_t pid, char *str)
 	}
 }
 
-int main(int ac, char **av)
+int							main(int ac, char **av)
 {
 	pid_t pid;
 	struct sigaction sa;
