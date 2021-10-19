@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
-#define MINITALK_H
-#include <signal.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
+	#define MINITALK_H
+	#include <signal.h>
+	#include <unistd.h>
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <limits.h>
 
 void				ft_listen(int sig, siginfo_t *info, void *context);
 void				ft_write_pid(pid_t nbr);
