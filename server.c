@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include "minitalk.h"
-void				do_exit(void)
-void				ft_listen(int sig, siginfo_t *info, void *context)
+
+void	ft_listen(int sig, siginfo_t *info, void *context)
 {
-	static int pos = 0;
-	static char rst = 0;
+	static int	pos = 0;
+	static char	rst = 0;
 
 	if (sig == SIGUSR1)
 	{
@@ -38,7 +38,7 @@ void				ft_listen(int sig, siginfo_t *info, void *context)
 	kill(info->si_pid, SIGUSR1);
 }
 
-int					main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	struct sigaction sa;
 	pid_t pid;
