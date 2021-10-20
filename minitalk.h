@@ -22,5 +22,7 @@ void				ft_listen(int sig, siginfo_t *info, void *context);
 void				ft_write_pid(pid_t nbr);
 unsigned int		ft_atoi(char *str);
 void				do_exit(void);
+void				ft_send_signal(pid_t pid, int sig);
+
 
 #endif

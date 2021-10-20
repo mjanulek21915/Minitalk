@@ -34,7 +34,7 @@ void	ft_listen(int sig, siginfo_t *info, void *context)
 		pos = 0;
 		rst = 0;
 	}
-	kill(info->si_pid, SIGUSR1);
+	ft_send_signal(info->si_pid, SIGUSR1);
 }
 
 int	main(int ac, char **av)

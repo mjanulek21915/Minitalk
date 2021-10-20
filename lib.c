@@ -28,7 +28,7 @@ unsigned int	ft_atoi(char *str)
 		rst = rst + *str - '0';
 		str++;
 	}
-	if (rst <= UINT_MAX && rst)
+	if (rst <= UINT_MAX && rst > 0)
 		return ((unsigned int)rst);
 	else
 		do_exit();
@@ -59,4 +59,13 @@ void	ft_write_pid(pid_t nbr)
 		ft_write_pid_rec(nbr);
 	else
 		write(1, "0", 1);
+}
+
+void	ft_send_signal(pid_t pid, int sig)
+{
+	if (kill(pid, sig))
+	{
+		fprintf(stderr, "wronk pid\n");
+		do_exit();
+	}
 }

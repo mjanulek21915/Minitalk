@@ -28,9 +28,9 @@ static void	ft_client_transmit_byte(pid_t pid, char c)
 		rst = c & 128;
 		c = c << 1;
 		if (rst == 0)
-			kill(pid, SIGUSR1);
+			ft_send_signal(pid, SIGUSR1);
 		else
-			kill(pid, SIGUSR2);
+			ft_send_signal(pid, SIGUSR2);
 		usleep(10000);
 		i++;
 	}
